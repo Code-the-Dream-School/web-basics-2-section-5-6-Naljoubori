@@ -1,11 +1,8 @@
 //create a 'reset' and a 'new game' buttons as childs of the element with the id 'buttons' 
 const buttons = document.getElementById('buttons');
 buttons.innerHTML = `<button id='new'>New Game</button><button id='reset'>Reset</button>`;
-
-//start game function
 const new_Battleship = () => 
 {
-
   const player1 = {
     player1_Name: prompt(`"Enter first Player name"`),
     shipsCount: 0,
@@ -39,12 +36,11 @@ const new_Battleship = () =>
     while( player2.shipsCount !== 4 ){
       const xpos = Math.floor(Math.random() * Math.floor(4)); 
       const ypos = Math.floor(Math.random() * Math.floor(4));
-      if( player2.gameBoard[xpos][ypos] == 0){
+      if( player2.gameBoard[xpos][ypos] === 0){
         player2.gameBoard[xpos][ypos] = 1;
         player2.shipsCount++
       }
     }
-
 
     for (var x = 0; x < 4; x++) {
       const li1 = document.createElement('li'); // creating childs for the list (board), in this case represent a row number 'x' of the board
@@ -71,58 +67,46 @@ const new_Battleship = () =>
           lives2.textContent = `${player2.shipsCount}`;
           lives1.textContent = `${player1.shipsCount}`;
 
-          cell1.addEventListener( 'click', (e) =>
-             {
+          cell1.addEventListener( 'click', (e) => { 
               if(player1.shipsCount !== 0 && player2.shipsCount !== 0)
               {
-                if(turn.textContent === `${player2.player2_Name}`)
-                {
+                if(turn.textContent === `${player2.player2_Name}`) {
                   let cell1 = e.target; 
                   cell1.style.backgroundColor = "purple";
                   turn.textContent = `${player1.player1_Name}`;
-                  if(pos1 == 1)
-                  {
+                  if(pos1 === 1) {
                     player1.shipsCount--;
                     lives1.textContent = `${player1.shipsCount}`;
-                    if(player1.shipsCount == 0)
-                    {
+                    if(player1.shipsCount == 0) {
                       turn.textContent = `Congratulationes ${player2.player2_Name.toUpperCase()}!! you win!`;
                       alert(`Congratulationes ${player2.player2_Name.toUpperCase()}!! you win!`);
                     }
                   } 
                   cell1.textContent = `${pos1}`;  
                 } 
-                  else 
-                  {
+                  else {
                     alert(`It is ${player1.player1_Name}'s turn!`)
                   }
               }
             });
 
-          cell2.addEventListener( 'click', (e) =>
-          {
-            if(player1.shipsCount !== 0 && player2.shipsCount !== 0)
-            {
-              if(turn.textContent === `${player1.player1_Name}`)
-              {
+          cell2.addEventListener( 'click', (e) => {
+            if(player1.shipsCount !== 0 && player2.shipsCount !== 0) {
+              if(turn.textContent === `${player1.player1_Name}`)  {
                 let cell2 = e.target;
                 cell2.style.background ="purple";
                 cell2.textContent = `${pos2}`;
                 turn.textContent = `${player2.player2_Name}`;
-
-                if(pos2 == 1)
-                {
+                if(pos2 === 1) {
                   player2.shipsCount--;
                   lives2.textContent = `${player2.shipsCount}`;
-                  if(player2.shipsCount == 0)
-                  {
+                  if(player2.shipsCount == 0) {
                     turn.textContent = `Congratulationes ${player1.player1_Name.toUpperCase()}!! you win!`;
                     alert(`Congratulationes ${player1.player1_Name.toUpperCase()}!! you win!`);
                   }
                 } 
               } 
-                else
-                {
+                else {
                   alert(`It is ${player2.player2_Name}'s turn!`)
                 }
             }
@@ -139,15 +123,13 @@ const new_Battleship = () =>
   }
 
   addShips();
-  document.getElementById('reset').addEventListener('click', (e) => {
+  document.getElementById('reset').addEventListener('click', () => {
     board_Player1.innerHTML = '';
     board_Player2.innerHTML = '';
     addShips();
   });
-
 }
-new_Battleship();
-
+new_Battleship ();
 document.getElementById('new').addEventListener('click', (e) => {
 document.getElementById('board_player1').innerHTML = '';
 document.getElementById('board_player2').innerHTML = '';
